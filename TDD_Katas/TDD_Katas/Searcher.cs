@@ -8,5 +8,10 @@ namespace TDD_Katas
 {
     public class Searcher
     {
+        private readonly IEnumerable<string> Dataset;
+        public Searcher(IEnumerable<string> dataset)
+        {
+            this.Dataset = dataset;
+        }
     }
 }

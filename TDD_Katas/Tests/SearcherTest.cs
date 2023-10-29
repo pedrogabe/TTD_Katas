@@ -13,7 +13,7 @@
         [Test]
         public void GivenLessThanTwoCharactersToLookFor_ShallNotReturnAnyResults()
         {
-            string[] shortTexts = { "", ",", "x" };
+            string[] shortTexts = { "", ",", "V", "a" };
             Assert.Multiple(() =>
             {
                 foreach (var shortText in shortTexts)

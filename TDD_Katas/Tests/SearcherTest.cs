@@ -1,4 +1,6 @@
-﻿namespace Tests
+﻿using System.Linq;
+
+namespace Tests
 {
     public class SearcherTest
     {
@@ -11,7 +13,7 @@
         }
 
         [Test]
-        public void GivenLessThanTwoCharactersToLookFor_ShallNotReturnAnyResults()
+        public void WhenSearchingLessThanTwoCharacters_ShallNotReturnAnyResults()
         {
             string[] shortTexts = { "", ",", "V", "a" };
             Assert.Multiple(() =>
@@ -24,22 +26,32 @@
         }
 
         [Test]
-        public void GivenNullStringToSearch_ShallThrowArgumentNullException()
+        public void WhenSearchingNullString_ShallThrowArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() => { Searcher.Search(null); });
         }
 
         [Test]
-        public void GivenValidStringToSearchButNoMatchesExistInDataset_ShallNotReturnAnyResults()
+        public void WhenSearchingValidStringButNoMatchesExistInDataset_ShallReturnEmptyList()
         {
             string[] validTextsWithNoMatch = { "skoooje", "jajajaja", "fffff" };
             Assert.Multiple(() =>
             {
                 foreach (var shortText in validTextsWithNoMatch)
                 {
-                    Assert.That(Searcher.Search(shortText).Count, Is.EqualTo(0));
+                    Assert.That(Searcher.Search(shortText), Is.Empty);
                 }
             });
+        }
+
+        [Test]
+        public void WhenSearchingSomeValidString_ShallReturnTextsStartingWithSameText()
+        {
+            string textToSearch = "Va";
+            List<string> expectedResult = new() { "Valencia", "Vancouver" };
+
+            var orderedResult = Searcher.Search(textToSearch).OrderBy(el => el);
+            CollectionAssert.AreEqual(orderedResult, expectedResult);
         }
     }
 }

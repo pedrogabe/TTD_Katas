@@ -18,7 +18,9 @@ namespace TDD_Katas
         {
             if (textToSearch == null)
                 throw new ArgumentNullException(nameof(textToSearch));
-            return new List<string>();
+            if (textToSearch.Length < 2)
+                return new List<string>();
+            return Dataset.Where(x=>x.Contains(textToSearch)).ToList();
         }
     }
 }

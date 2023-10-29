@@ -53,5 +53,18 @@ namespace Tests
             var orderedResult = Searcher.Search(textToSearch).OrderBy(el => el);
             CollectionAssert.AreEqual(orderedResult, expectedResult);
         }
+
+        [Test]
+        public void WhenSearchingSameStringWithDifferentCapitalization_ShallReturnSameResults()
+        {
+            List<string> textsToSearch = new() { "Val", "vAL", "VAL" },
+                    expectedResult = new() { "Valencia" };
+
+            Assert.Multiple(() =>
+            {
+                foreach (var textToSearch in textsToSearch)
+                    Assert.That(Searcher.Search(textToSearch), Is.EqualTo(expectedResult));
+            });
+        }
     }
 }

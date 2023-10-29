@@ -66,5 +66,14 @@ namespace Tests
                     Assert.That(Searcher.Search(textToSearch), Is.EqualTo(expectedResult));
             });
         }
+
+        [Test]
+        public void WhenSearchingSomeValidString_ShallReturnTextsThatContainItJustAsAPart()
+        {
+            string textToSearch = "ape";
+            List<string> expectedResult = new() { "Budapest" };
+
+            Assert.That(Searcher.Search(textToSearch), Is.EqualTo(expectedResult));
+        }
     }
 }

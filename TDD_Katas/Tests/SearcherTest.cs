@@ -17,9 +17,16 @@ namespace Tests
         }
 
         [Test]
-        public void Test()
+        public void GivenLessThanTwoCharactersToLookFor_ShallNotReturnAnyResults()
         {
-
+            string[] shortTexts = { "", ",", "x" };
+            Assert.Multiple(() =>
+            {
+                foreach (var shortText in shortTexts)
+                {
+                    Assert.That(Searcher.Search(shortText).Count, Is.EqualTo(0));
+                }
+            });
         }
     }
 }

@@ -13,5 +13,10 @@ namespace TDD_Katas
         {
             this.Dataset = dataset;
         }
+
+        public List<string> Search(string textToSearch)
+        {
+            return new List<string>();
+        }
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tests
+﻿namespace Tests
 {
     public class SearcherTest
     {
@@ -27,6 +21,12 @@ namespace Tests
                     Assert.That(Searcher.Search(shortText).Count, Is.EqualTo(0));
                 }
             });
+        }
+
+        [Test]
+        public void GivenNullStringToSearch_ShallThrowArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => { Searcher.Search(null); });
         }
     }
 }

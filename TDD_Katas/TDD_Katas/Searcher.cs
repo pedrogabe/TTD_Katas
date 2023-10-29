@@ -16,6 +16,8 @@ namespace TDD_Katas
 
         public List<string> Search(string textToSearch)
         {
+            if (textToSearch == null)
+                throw new ArgumentNullException(nameof(textToSearch));
             return new List<string>();
         }
     }

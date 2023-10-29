@@ -28,5 +28,18 @@
         {
             Assert.Throws<ArgumentNullException>(() => { Searcher.Search(null); });
         }
+
+        [Test]
+        public void GivenValidStringToSearchButNoMatchesExistInDataset_ShallNotReturnAnyResults()
+        {
+            string[] validTextsWithNoMatch = { "skoooje", "jajajaja", "fffff" };
+            Assert.Multiple(() =>
+            {
+                foreach (var shortText in validTextsWithNoMatch)
+                {
+                    Assert.That(Searcher.Search(shortText).Count, Is.EqualTo(0));
+                }
+            });
+        }
     }
 }

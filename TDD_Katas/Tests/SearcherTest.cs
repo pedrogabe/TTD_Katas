@@ -5,11 +5,12 @@ namespace Tests
     public class SearcherTest
     {
         private Searcher Searcher { get; set; }
+        private string[] TestDataset { get; set; }
         [SetUp]
         public void SetUp()
         {
-            var testDataset = "Paris, Budapest, Skopje, Rotterdam, Valencia, Vancouver, Amsterdam, Vienna, Sydney, New York City, London, Bangkok, Hong Kong, Dubai, Rome, Istanbul".Split(", ");
-            Searcher = new Searcher(testDataset);
+            TestDataset = "Paris, Budapest, Skopje, Rotterdam, Valencia, Vancouver, Amsterdam, Vienna, Sydney, New York City, London, Bangkok, Hong Kong, Dubai, Rome, Istanbul".Split(", ");
+            Searcher = new Searcher(TestDataset);
         }
 
         [Test]
@@ -74,6 +75,14 @@ namespace Tests
             List<string> expectedResult = new() { "Budapest" };
 
             Assert.That(Searcher.Search(textToSearch), Is.EqualTo(expectedResult));
+        }
+
+        [Test]
+        public void WhenSearchingAsterisk_ShallReturnWholeDataset()
+        {
+            string textToSearch = "*";
+
+            Assert.That(Searcher.Search(textToSearch), Is.EqualTo(TestDataset));
         }
     }
 }

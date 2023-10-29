@@ -19,6 +19,8 @@ namespace TDD_Katas
         public List<string> Search(string textToSearch)
         {
             ValidateArgumentIsNotNull(textToSearch, nameof(textToSearch));
+            if (textToSearch == "*")
+                return Dataset.ToList();
             if (TextToSearchIsTooShort(textToSearch))
                 return new List<string>();
             var results = GetFilteredDataSet(textToSearch);
